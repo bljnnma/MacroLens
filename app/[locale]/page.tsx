@@ -139,6 +139,7 @@ export default async function DashboardPage({
                 rawLabel: tx(c.rawLabel, lang),
                 weight: c.weight,
                 contribution: c.contribution,
+                inProfile: c.inProfile,
               })),
             }))}
           />

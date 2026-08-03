@@ -49,7 +49,7 @@ const SEEDS: EventSeed[] = [
 
   { indicatorCode: 'POLICY_RATE', factorCode: 'RATE', currency: 'USD', offsetHours: 4, importance: 'high' },
   { indicatorCode: 'CPI_YOY', factorCode: 'CPI', currency: 'JPY', offsetHours: 9, importance: 'medium' },
-  { indicatorCode: 'NFP', factorCode: 'NFP', currency: 'AUD', offsetHours: 21, importance: 'medium' },
+  { indicatorCode: 'EMPLOY_CHANGE', factorCode: 'NFP', currency: 'AUD', offsetHours: 21, importance: 'medium' },
   { indicatorCode: 'PMI_MFG', factorCode: 'PMI', currency: 'GBP', offsetHours: 26, importance: 'medium' },
   { indicatorCode: 'RETAIL_MOM', factorCode: 'RETAIL', currency: 'USD', offsetHours: 31, importance: 'high' },
   { indicatorCode: 'CPI_YOY', factorCode: 'CPI', currency: 'NZD', offsetHours: 47, importance: 'medium' },
@@ -57,7 +57,7 @@ const SEEDS: EventSeed[] = [
   { indicatorCode: 'GDP_QOQ', factorCode: 'GDP', currency: 'USD', offsetHours: 72, importance: 'high' },
   { indicatorCode: 'PMI_MFG', factorCode: 'PMI', currency: 'CHF', offsetHours: 78, importance: 'low' },
   { indicatorCode: 'GDP_QOQ', factorCode: 'GDP', currency: 'EUR', offsetHours: 96, importance: 'high' },
-  { indicatorCode: 'NFP', factorCode: 'NFP', currency: 'CAD', offsetHours: 101, importance: 'medium' },
+  { indicatorCode: 'EMPLOY_CHANGE', factorCode: 'NFP', currency: 'CAD', offsetHours: 101, importance: 'medium' },
   { indicatorCode: 'CPI_YOY', factorCode: 'CPI', currency: 'CHF', offsetHours: 120, importance: 'low' },
 ];
 

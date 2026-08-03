@@ -49,10 +49,10 @@ export function CommandPalette({ items }: { items: SearchItem[] }) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="group flex h-9 w-full max-w-[320px] items-center gap-2.5 rounded-lg border border-line bg-surface px-3 text-left transition-ui hover:border-line-strong"
+        className="group flex h-9 w-full min-w-0 max-w-[320px] shrink items-center gap-2.5 rounded-lg border border-line bg-surface px-3 text-left transition-ui hover:border-line-strong"
       >
         <Search className="size-4 shrink-0 text-fg-subtle" aria-hidden />
-        <span className="flex-1 truncate text-[13px] text-fg-subtle">
+        <span className="min-w-0 flex-1 truncate text-[13px] text-fg-subtle">
           {t('topbar.searchPlaceholder')}
         </span>
         <kbd className="hidden shrink-0 rounded border border-line bg-surface-2 px-1.5 py-0.5 font-mono text-[10px] text-fg-subtle sm:block">

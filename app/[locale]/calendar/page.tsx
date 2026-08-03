@@ -55,16 +55,19 @@ export default async function CalendarPage({ params }: { params: Promise<{ local
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([key, events]) => {
       const iso = new Date(`${key}T00:00:00Z`).toISOString();
+      const weekday = formatWeekday(iso, lang, 'UTC');
+      const isRelative = key === todayKey || key === tomorrowKey;
+
       return {
         key,
-        heading:
-          key === todayKey
+        heading: isRelative
+          ? key === todayKey
             ? t('calendar.today')
-            : key === tomorrowKey
-              ? t('calendar.tomorrow')
-              : formatWeekday(iso, lang, 'UTC'),
+            : t('calendar.tomorrow')
+          : weekday,
         dateLabel: formatDateInZone(iso, lang, 'UTC'),
-        weekday: formatWeekday(iso, lang, 'UTC'),
+        // Only shown when the heading is relative, otherwise it repeats it.
+        weekday: isRelative ? weekday : '',
         events,
       };
     });

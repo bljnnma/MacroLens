@@ -117,6 +117,32 @@ export const INDICATORS: Indicator[] = [
     },
   },
   {
+    // NFP is US-specific. Every other currency is scored on the same factor
+    // through its own employment series, so the calendar must not label an
+    // Australian release "Non-Farm Payrolls".
+    code: 'EMPLOY_CHANGE',
+    factorCode: 'NFP',
+    category: 'labour',
+    frequency: 'monthly',
+    bandMinor: 10,
+    bandMajor: 30,
+    unit: 'K',
+    weightRange: [7, 16],
+    name: { mn: 'Хөдөлмөр эрхлэлтийн өөрчлөлт', en: 'Employment Change' },
+    description: {
+      mn: 'АНУ-аас бусад валютын хувьд сард нэмэгдсэн ажлын байрны тоо буюу ажилгүйдлийн түвшин.',
+      en: 'Monthly change in employment, or the unemployment rate, for currencies outside the US.',
+    },
+    whyItMatters: {
+      mn: 'Төв банк бүр хөдөлмөрийн зах зээлийн байдлыг бодлогын шийдвэртээ тусгадаг.',
+      en: 'Every central bank weighs labour market slack when setting policy.',
+    },
+    howItAffects: {
+      mn: 'Ажлын байр таамгаас илүү нэмэгдвэл валютад эерэг. Ажилгүйдлийн түвшний хувьд эсрэгээр тооцно.',
+      en: 'Job gains above forecast support the currency. For unemployment rate series the sign inverts.',
+    },
+  },
+  {
     code: 'RETAIL_MOM',
     factorCode: 'RETAIL',
     category: 'growth',
@@ -211,4 +237,12 @@ export const INDICATORS: Indicator[] = [
 ];
 
 export const INDICATOR_BY_CODE = new Map(INDICATORS.map((i) => [i.code, i]));
-export const INDICATOR_BY_FACTOR = new Map(INDICATORS.map((i) => [i.factorCode, i]));
+
+/**
+ * First match wins: several indicators can feed one factor (NFP and
+ * EMPLOY_CHANGE both feed NFP), and the first is the canonical one to link to.
+ */
+export const INDICATOR_BY_FACTOR = INDICATORS.reduce((map, i) => {
+  if (!map.has(i.factorCode)) map.set(i.factorCode, i);
+  return map;
+}, new Map<string, Indicator>());

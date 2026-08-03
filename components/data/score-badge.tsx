@@ -89,10 +89,12 @@ export function CoverageBadge({
   coverage,
   isSufficient,
   className,
+  showPercent = true,
 }: {
   coverage: number;
   isSufficient: boolean;
   className?: string;
+  showPercent?: boolean;
 }) {
   const filled = coverageDots(coverage);
 
@@ -109,12 +111,14 @@ export function CoverageBadge({
           />
         ))}
       </span>
-      <span
-        data-numeric
-        className={cn('text-[13px] tabular-nums', isSufficient ? 'text-fg-muted' : 'text-warn')}
-      >
-        {formatPercent(coverage)}
-      </span>
+      {showPercent && (
+        <span
+          data-numeric
+          className={cn('text-[13px] tabular-nums', isSufficient ? 'text-fg-muted' : 'text-warn')}
+        >
+          {formatPercent(coverage)}
+        </span>
+      )}
     </span>
   );
 }

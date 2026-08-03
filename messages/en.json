@@ -133,6 +133,8 @@
     "strongNegative": "Strong negative",
     "strongPositive": "Strong positive",
     "unavailable": "No data, or data too old to use",
+    "notInProfile": "Not scored by this market's profile",
+    "notInProfileShort": "Not in profile",
     "cellTooltip": "{factor} · {asset}"
   },
   "asset": {

@@ -47,7 +47,7 @@ export function CalendarList({ days }: { days: CalendarDayView[] }) {
             <span data-numeric className="text-[13px] tabular-nums text-fg-muted">
               {day.dateLabel}
             </span>
-            <span className="text-[13px] text-fg-subtle">{day.weekday}</span>
+            {day.weekday && <span className="text-[13px] text-fg-subtle">{day.weekday}</span>}
             <span className="ml-auto text-[12px] text-fg-subtle">
               {t('calendar.eventCount', { count: day.events.length })}
             </span>

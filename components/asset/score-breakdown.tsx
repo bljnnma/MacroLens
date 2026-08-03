@@ -84,17 +84,15 @@ export function ScoreBreakdown({
       </div>
 
       <div className="relative h-12 w-full overflow-hidden rounded-lg bg-canvas ring-1 ring-inset ring-line">
+        {/* The baseline renders as part of the calculation, not as chart chrome —
+            otherwise 50 + Σ = score does not close to the eye. */}
         <div
           className={cn(
-            'absolute inset-y-0 left-0 flex items-center justify-end bg-neu/40 pr-2 transition-ui',
+            'absolute inset-y-0 left-0 bg-neu/40 transition-ui',
             active && 'opacity-40'
           )}
           style={{ width: `${baseScore}%` }}
-        >
-          <span className="hidden text-[11px] font-medium uppercase tracking-wider text-fg-subtle sm:block">
-            {t('common.baseScore')}
-          </span>
-        </div>
+        />
 
         {segments.map(({ factor, start, size }) => (
           <button

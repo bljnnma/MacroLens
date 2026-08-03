@@ -135,7 +135,11 @@ export default async function AssetDetailPage({
             {formatPercent(score.coverage)}
           </div>
           <div className="mt-2 flex flex-wrap items-center gap-2">
-            <CoverageBadge coverage={score.coverage} isSufficient={score.isSufficient} />
+            <CoverageBadge
+              coverage={score.coverage}
+              isSufficient={score.isSufficient}
+              showPercent={false}
+            />
             {!score.isSufficient && <LowCoverageFlag label={t('states.lowCoverageShort')} />}
           </div>
         </div>

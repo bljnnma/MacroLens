@@ -39,6 +39,7 @@ export default async function HeatmapPage({ params }: { params: Promise<{ locale
               rawLabel: tx(c.rawLabel, lang),
               weight: c.weight,
               contribution: c.contribution,
+              inProfile: c.inProfile,
             })),
           }))}
         />

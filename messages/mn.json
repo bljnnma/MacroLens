@@ -133,6 +133,8 @@
     "strongNegative": "Хүчтэй сөрөг",
     "strongPositive": "Хүчтэй эерэг",
     "unavailable": "Өгөгдөл байхгүй эсвэл хуучирсан",
+    "notInProfile": "Энэ зах зээлийн профайлд ороогүй хүчин зүйл",
+    "notInProfileShort": "Профайлд ороогүй",
     "cellTooltip": "{factor} · {asset}"
   },
   "asset": {

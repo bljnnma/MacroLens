@@ -221,6 +221,12 @@ export function HeatmapLegend() {
         </span>
         {t('heatmap.unavailable')}
       </span>
+      <span className="flex items-center gap-1.5">
+        <span className="flex size-6 items-center justify-center rounded-[4px] text-[11px] text-fg-subtle/40">
+          ·
+        </span>
+        {t('heatmap.notInProfile')}
+      </span>
     </div>
   );
 }
