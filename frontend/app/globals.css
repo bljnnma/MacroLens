@@ -1,0 +1,241 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   Token architecture.
+
+   `@theme inline` makes Tailwind substitute the raw variable into each utility
+   (`bg-canvas` -> `background-color: var(--canvas)`) instead of emitting an
+   intermediate `--color-canvas`. That is what lets a single attribute on <html>
+   repaint the whole product without any utility knowing a theme exists.
+
+   The rule that keeps this readable at density holds in both themes:
+     Semantic colour belongs to DATA.  Accent colour belongs to INTERACTION.
+--------------------------------------------------------------------------- */
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+
+  --color-pos: var(--pos);
+  --color-neg: var(--neg);
+  --color-neu: var(--neu);
+  --color-accent: var(--accent);
+  --color-warn: var(--warn);
+
+  --color-cell-p2: var(--cell-p2);
+  --color-cell-p1: var(--cell-p1);
+  --color-cell-0: var(--cell-0);
+  --color-cell-n1: var(--cell-n1);
+  --color-cell-n2: var(--cell-n2);
+
+  --color-cell-fg-p2: var(--cell-fg-p2);
+  --color-cell-fg-p1: var(--cell-fg-p1);
+  --color-cell-fg-0: var(--cell-fg-0);
+  --color-cell-fg-n1: var(--cell-fg-n1);
+  --color-cell-fg-n2: var(--cell-fg-n2);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-jb), ui-monospace, monospace;
+
+  --radius-card: 12px;
+  --radius-badge: 6px;
+}
+
+/* --- Light (also the no-preference default) ------------------------------ */
+:root {
+  color-scheme: light;
+
+  --canvas: #ffffff;
+  --surface: #fafafa;
+  --surface-2: #f4f4f5;
+  --surface-3: #e4e4e7;
+
+  --line: #e4e4e7;
+  --line-strong: #d4d4d8;
+
+  --fg: #18181b;
+  --fg-muted: #52525b;
+  --fg-subtle: #71717a;
+
+  /* Darker than the dark-theme values: emerald-600/rose-500 fail AA on white
+     at 13px, which is most of the numbers in this product. */
+  --pos: #047857;
+  --neg: #be123c;
+  --neu: #a1a1aa;
+  --accent: #2563eb;
+  --warn: #b45309;
+
+  /* Heatmap inverts: light fills carrying dark text, so cell contrast holds. */
+  --cell-p2: #a7f3d0;
+  --cell-p1: #d1fae5;
+  --cell-0: #f4f4f5;
+  --cell-n1: #ffe4e6;
+  --cell-n2: #fecdd3;
+
+  --cell-fg-p2: #065f46;
+  --cell-fg-p1: #047857;
+  --cell-fg-0: #71717a;
+  --cell-fg-n1: #be123c;
+  --cell-fg-n2: #9f1239;
+}
+
+/* --- Dark ---------------------------------------------------------------- */
+/* `:not([data-theme])` means the system preference only applies while the user
+   has expressed none. Once they choose, the attribute wins with no specificity
+   fight and no `!important`. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+
+    --canvas: #09090b;
+    --surface: #111113;
+    --surface-2: #18181b;
+    --surface-3: #1f1f23;
+
+    --line: #27272a;
+    --line-strong: #3f3f46;
+
+    --fg: #fafafa;
+    --fg-muted: #a1a1aa;
+    --fg-subtle: #71717a;
+
+    --pos: #10b981;
+    --neg: #f43f5e;
+    --neu: #52525b;
+    --accent: #3b82f6;
+    --warn: #f59e0b;
+
+    --cell-p2: #065f46;
+    --cell-p1: #05372b;
+    --cell-0: #18181b;
+    --cell-n1: #4c0519;
+    --cell-n2: #881337;
+
+    --cell-fg-p2: #6ee7b7;
+    --cell-fg-p1: #34d399;
+    --cell-fg-0: #71717a;
+    --cell-fg-n1: #fb7185;
+    --cell-fg-n2: #fda4af;
+  }
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --canvas: #09090b;
+  --surface: #111113;
+  --surface-2: #18181b;
+  --surface-3: #1f1f23;
+
+  --line: #27272a;
+  --line-strong: #3f3f46;
+
+  --fg: #fafafa;
+  --fg-muted: #a1a1aa;
+  --fg-subtle: #71717a;
+
+  --pos: #10b981;
+  --neg: #f43f5e;
+  --neu: #52525b;
+  --accent: #3b82f6;
+  --warn: #f59e0b;
+
+  --cell-p2: #065f46;
+  --cell-p1: #05372b;
+  --cell-0: #18181b;
+  --cell-n1: #4c0519;
+  --cell-n2: #881337;
+
+  --cell-fg-p2: #6ee7b7;
+  --cell-fg-p1: #34d399;
+  --cell-fg-0: #71717a;
+  --cell-fg-n1: #fb7185;
+  --cell-fg-n2: #fda4af;
+}
+
+@layer base {
+  * {
+    border-color: var(--line);
+  }
+
+  html {
+    background-color: var(--canvas);
+  }
+
+  body {
+    background-color: var(--canvas);
+    color: var(--fg);
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Every number in the product is tabular. Without this, digit widths shift
+     between renders and whole score columns shimmer on refresh — the single
+     cheapest difference between "terminal" and "web demo". */
+  table,
+  [data-numeric] {
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--accent) 30%, transparent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--line-strong);
+    border-radius: 999px;
+    border: 3px solid var(--canvas);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--fg-subtle);
+  }
+}
+
+@layer utilities {
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Motion budget: <=150ms ease-out, hover/reveal only.
+     No count-ups, no chart draw-in, no page transitions. A trader reloading
+     during a CPI print needs the number now. */
+  .transition-ui {
+    transition-property: background-color, border-color, color, opacity;
+    transition-duration: 120ms;
+    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .scroll-hint-right {
+    mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

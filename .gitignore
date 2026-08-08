@@ -1,42 +1,33 @@
-# dependencies
-node_modules
-.pnp
-.pnp.js
+# ── Node / Next.js ───────────────────────────────────────────────────────────
+node_modules/
+.next/
+out/
+build/
+*.tsbuildinfo
 
-# testing
-coverage
+# ── .NET ─────────────────────────────────────────────────────────────────────
+[Bb]in/
+[Oo]bj/
+TestResults/
+*.user
+*.suo
 
-# next.js
-.next
-out
-build
+# ── Local environment ────────────────────────────────────────────────────────
+# The FRED API key lives in `dotnet user-secrets` (outside the repo) and must
+# never be committed. These cover everything else that is machine-specific.
+.env.local
+.env*.local
 
-# production
-dist
-
-# misc
+# ── Editors and OS ───────────────────────────────────────────────────────────
+.vs/
+.idea/
+.vscode/
 .DS_Store
-*.pem
+Thumbs.db
 
-# debug
+# ── Logs ─────────────────────────────────────────────────────────────────────
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
-
-# env files
-.env
-.env*.local
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
-
-# editor
-.vscode/*
-!.vscode/extensions.json
-.idea
-

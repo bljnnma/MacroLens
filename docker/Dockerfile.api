@@ -1,0 +1,24 @@
+# Build context is the repository root.
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+WORKDIR /src
+
+# Restore against the project files alone so the layer caches across code edits.
+COPY backend/Scorecard.sln ./
+COPY backend/src/Scorecard.Api/Scorecard.Api.csproj src/Scorecard.Api/
+COPY backend/tests/Scorecard.Api.Tests/Scorecard.Api.Tests.csproj tests/Scorecard.Api.Tests/
+RUN dotnet restore src/Scorecard.Api/Scorecard.Api.csproj
+
+COPY backend/ ./
+RUN dotnet publish src/Scorecard.Api/Scorecard.Api.csproj -c Release -o /app --no-restore
+
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
+WORKDIR /app
+COPY --from=build /app ./
+
+ENV ASPNETCORE_URLS=http://+:8080
+EXPOSE 8080
+
+# Non-root by default.
+USER $APP_UID
+
+ENTRYPOINT ["dotnet", "Scorecard.Api.dll"]
